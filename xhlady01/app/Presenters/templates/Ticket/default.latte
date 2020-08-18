@@ -1,0 +1,70 @@
+{import '../components/comments.latte'}
+{import '../components/taskList.latte'}
+{import '../components/searchBox.latte'}
+{import '../components/state.latte'}
+
+{block mainContent}
+    <div class="row">
+        <div class="col-sm-9">
+            <h1>{$ticket->name}</h1>
+            <p>{StrFTime("%e. %m. %Y %H:%M:%S", strtotime($ticket->createDate))}</p>
+        </div>
+        <div class="col-sm-3">
+            <a n:if="$showEdit" n:href="Ticket:edit $ticket->id" class="btn btn-outline-warning">
+                Editovat
+            </a>
+            <a n:if="$showEdit" class="btn btn-outline-danger ml-2" onclick="return confirm('Opravdu smazat ticket?');" n:href="delete $ticket->id">
+                Smazat
+            </a>
+            <a n:if="$showCreateTask" n:href="Task:create $ticket->id" class="btn btn-outline-warning">
+                Vytvořit úkol
+            </a>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-9 md-description">
+            {block|parsedown}{$ticket->description}{/block}
+        </div>
+        <div class="col-sm-3">
+            <div>Navázaný produkt:</div>
+            <div><b>{$product['name']}</b></div>
+            <hr>
+            <div>Autor ticketu:</div>
+            <div><b>{$author['login']}</b></div>
+            <hr>
+            <div>Stav:</div>
+            <div><b>{include state $state['name']}</b></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="true">
+                        Komentáře
+                    </a>
+                </li>
+                <li class="nav-item" n:if="$showTasks">
+                    <a class="nav-link" id="tasks-tab" data-toggle="tab" href="#tasks" role="tab" aria-controls="tasks" aria-selected="false">
+                        Úkoly
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content mt-3 container">
+                <div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                    {include comments}
+                </div>
+
+                <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab" n:if="$showTasks">
+                    <div class="row">
+                        {include searchBox}
+                    </div>
+                    {include taskList}
+                </div>
+        </div>
+    </div>
+{/block}

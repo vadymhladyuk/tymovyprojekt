@@ -1,0 +1,14 @@
+{import '../components/searchBox.latte'}
+
+{block headerContent}
+    <div class="jumbotron text-center">
+        <h1>Issue Tracking System</h1>
+        <p>Zahoďte papír a tužku. Jsme tady!</p>
+    </div>
+{/block}
+
+{block mainContent}
+    {include searchBox}
+
+    {control grid}
+{/block}

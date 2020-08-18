@@ -1,0 +1,41 @@
+{define navbar}
+    {var $logIn = $user->isLoggedIn()}
+    {var $canEditUsers = ($logIn and $user->isAllowed("edit_users"))}
+    {var $canCreateTicket = ($logIn and $user->isAllowed("create_ticket"))}
+    {var $showTasks = ($logIn and $user->isAllowed("show_tasks"))}
+    {var $showProducts = ($logIn and $user->isAllowed("show_products"))}
+    <nav class="navbar bg-dark navbar-dark navbar-expand-sm">
+        <a class="navbar-brand" n:href="Homepage:default">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABmJLR0QA/wD/AP+gvaeTAAACDUlEQVRIic2VPWgUURSFzwspNEaMBt1E7azFRrGyDCklQTCKafzBSpuYWBpstBNBLKLYpk6n6YwGCYI/hVgEtNZgEU3WgMl+KeYO3J19b9kXFDwwvOHMPefct/fNjpQBYBR4btdIjjYnZIRmNICzfzukBizRiiWglmv2Engb4W8BG5GQEhvARMLvTSxozYQ9jrvYJqCKMafbY9xayXW5rBVbDzruUsaPMu7uS49vsaBlW085ri8jyNeWHqVnU9C8rRcc9z4j6J27Lz3mW6qAQaBux3bIuKPA1w7m8wU4Ypoh81gHBqMtAdMm/AlcBXbZYK8AT4A5YNGuOWAGuAz0AAEYB36Zx53k3oEuYNZ1+gN4AAwDvZH63cAZ4B6w7HSzgB+LQkQcJH2UdDzSy6qKk7Qlaa+kw2qes1TM6mQIAU92V51CCAB/EpveZyGSdCBR06iGSFIAPkg6kRDFMGzriwzN625JjQyBJC1m1ktSyw4LFm6nzrGrSWEq5lkdpIA+SYd20HWJmnmkAZwDVtp028mOAL4Do6mQMYo3GmABmAI2M4I2gUnTAmwB56shx4DfFnTD8Xczgqbds5vmVQcGfNBDK35aaSAAjzsIekTxonvtM3t235OfjfSfCB92neL/rxq0Clyrhtjz01bzyZN1I5OnBejHfbKBCaC/Tf1+81z35CtgISXaKf6V7/+BbYmwW97FGGpeAAAAAElFTkSuQmCC">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" n:href="Homepage:default">Tikety</a></li>
+                <li class="nav-item" n:if="$showTasks"><a class="nav-link" n:href="Task:default">Úkoly</a></li>
+                <li class="nav-item" n:if="$showProducts"><a class="nav-link" n:href="Product:default">Produkty</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {* nepřihlášený uživatel *}
+                <li class="nav-item" n:if="!$logIn"><a class="nav-link" n:href="Sign:in">Přihlášení</a></li>
+                <li class="nav-item" n:if="!$logIn"><a class="nav-link" n:href="Sign:up">Registrace</a></li>
+                {* přihlášený uživatel *}
+                <li class="nav-item" n:if="$canEditUsers"><a class="nav-link" n:href="User:default">Správa uživatelů</a></li>
+                <li class="nav-item mr-3" n:if="$canCreateTicket">
+                    <a class="btn btn-outline-primary my-2 my-sm-0" n:href="Ticket:create">
+                        Vytvoř ticket
+                    </a>
+                </li>
+                <li class="nav-item dropdown" n:if="$logIn">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {$user->getIdentity()->login}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" n:href="User:detail $user->getId()">Profil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" n:href="Sign:out">Odhlásit se</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{/define}

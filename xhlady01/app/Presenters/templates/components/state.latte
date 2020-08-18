@@ -1,0 +1,14 @@
+{define state $value}
+    {switch $value}
+        {case 'new'}
+            <span class="badge badge-success">nový</span>
+        {case 'in_progress'}
+            <span class="badge badge-primary">zpracováván</span>
+        {case 'resolved'}
+            <span class="badge badge-danger">vyřešen</span>
+        {case 'closed'}
+            <span class="badge badge-warning">uzavřen</span>
+        {default}
+            <span class="badge badge-secondary">$value</span>
+    {/switch}
+{/define}

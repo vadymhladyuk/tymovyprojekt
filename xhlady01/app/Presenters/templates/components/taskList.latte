@@ -1,0 +1,19 @@
+{import '../components/state.latte'}
+{define taskList}
+    <div class="row">
+        <div class="container">
+            <div class="list-group">
+                <a
+                        n:foreach="$tasks as $task"
+                        class="list-group-item list-group-item-action"
+                        n:href="Task:detail $task['id']"
+                >
+                    <div class="d-flex">
+                        <div class="mr-auto">{$task['name']}</div>
+                        <div>{include state $states[$task['stateId']]}</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{/define}

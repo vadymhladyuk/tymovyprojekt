@@ -1,0 +1,64 @@
+services:
+    	acl:
+    	    factory: Nette\Security\Permission
+    	    setup:
+    	        - addResource(create_ticket)
+    	        - addResource(edit_own_ticket)
+    	        - addResource(edit_any_ticket)
+    	        - addResource(edit_own_ticket_state)
+    	        - addResource(edit_any_ticket_state)
+    	        - addResource(show_users)
+
+
+    	        - addResource(create_comment)
+
+    	        - addResource(edit_users)
+
+    	        - addResource(show_tasks)
+    	        - addResource(edit_related_task)
+    	        - addResource(edit_any_task)
+    	        - addResource(create_related_task)
+    	        - addResource(create_any_task)
+
+    	        - addResource(show_products)
+    	        - addResource(edit_product)
+
+    	        # zákazník
+    	        - addRole(guest)
+
+    	        - allow(guest, create_ticket)
+    	        - allow(guest, edit_own_ticket)
+    	        - allow(guest, create_comment)
+    	        - allow(guest, show_products)
+    	        # /zákazník
+
+    	        # pracovník
+    	        - addRole(worker, guest)
+
+    	        - allow(worker, show_tasks)
+    	        # /pracovník
+
+    	        # manažer
+    	        - addRole(manager, worker)
+
+    	        - allow(manager, edit_own_ticket_state)
+    	        - allow(manager, create_related_task)
+    	        - allow(manager, edit_related_task)
+    	        # /manažer
+
+    	        # vedoucí
+    	        - addRole(executive, manager)
+
+    	        - allow(executive, edit_any_task)
+    	        - allow(executive, create_any_task)
+    	        - allow(executive, edit_product)
+    	        # /vedoucí
+
+    	        # administrátor
+    	        - addRole(admin, executive)
+
+    	        - allow(admin, edit_any_ticket)
+    	        - allow(admin, edit_users)
+    	        - allow(admin, show_users)
+    	        - allow(admin, edit_any_ticket_state)
+    	        # /administrátor

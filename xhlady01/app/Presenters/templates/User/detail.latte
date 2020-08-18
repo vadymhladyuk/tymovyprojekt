@@ -1,0 +1,63 @@
+{block mainContent}
+    <div class = "row">
+        <div class="col-sm-9">
+            <h1><b>{$userRecord->login}</b></h1>
+        </div>
+        <div class ="col-sm-2">
+            <a n:href="User:changePassword $userRecord->id" class="btn btn-outline-danger" style="float: right;">
+                {if ($userRecord->role == 'admin') || $user->getId()}
+                    <div>Změna hesla</div>
+                {/if}
+            </a>
+            <div >
+
+            </div>
+
+        </div>
+        <div class ="col-sm-1">
+            <a n:href="User:edit $userRecord->id" class="btn btn-outline-warning" style="float: right;">
+                {if ($userRecord->role == 'admin') || $user->getId()}
+                    <div>Upravit</div>
+                {/if}
+            </a>
+            <div >
+
+        </div>
+        </div>
+    </div>
+    <hr>
+    <div class = "row">
+        <div class = "col-sm-6">
+            <div class = "col-sm-6">
+                    {include bootstrap-form comboBox}
+                {*<form n:name="comboBox" class="form-inline">
+                    {input roleSelect class => "form-control col mr-1"}
+
+                    <hr>
+
+                    {input stateSelect class => "form-control col mr-1"}
+                </form>
+                *}
+            </div>
+        </div>
+        <div class = "col-sm-3">
+            <div>Jméno:</div>
+            <div><b>{$userRecord->name}</b></div>
+            <hr>
+            <div>Příjmení:</div>
+            <div><b>{$userRecord->surname}</b></div>
+            <hr>
+            <div>Email:</div>
+            <div><b>{$userRecord->email}</b></div>
+        </div>
+        <div class = "col-sm-3">
+            <div>Stav:</div>
+            <div><b>{if $userRecord->active}Aktivní{else}Neaktivní{/if}</b></div>
+            <hr>
+            <div>Role:</div>
+            <div><b>{$userRole}</b></div>
+        </div>
+
+
+    </div>
+{/block}

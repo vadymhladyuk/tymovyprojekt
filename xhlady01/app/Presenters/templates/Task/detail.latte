@@ -1,0 +1,46 @@
+{block mainContent}
+    <div class="row">
+        <div class="col-sm-8">
+            <h1>{$task->name}</h1>
+            <p>{$task->createDate}</p>
+        </div>
+        <div class="col-sm-4">
+            <a n:if="$showEdit" n:href="Task:edit $task->id" class="btn btn-outline-warning">
+                Editovat
+            </a>
+            <a n:if="$showUpdateProgress" n:href="Task:updateProgress $task->id" class="btn btn-outline-warning">
+                Vykázat čas
+            </a>
+            <a n:if="$showEdit" class="btn btn-outline-danger ml-2" onclick="return confirm('Opravdu smazat úkol?');" n:href="delete $task->id">
+                Smazat
+            </a>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-6 md-description">
+            {block|parsedown}{$task->description}{/block}
+        </div>
+        <div class="col-sm-3">
+            <div>K tiketu:</div>
+            <div><b>{$ticket['name']}</b></div>
+            <hr>
+            <div>Autor úkolu:</div>
+            <div><b>{$author['name']} {$author['surname']}</b></div>
+            <hr>
+            <div>Přiřazeno:</div>
+            <div><b>{$worker['name']} {$worker['surname']}</b></div>
+        </div>
+        <div class="col-sm-3">
+            <div>Stav:</div>
+            <div><b>{$state['name']}</b></div>
+            <hr>
+            <div>Očekávaný čas:</div>
+            <div><b>{$task->expectedTime} h</b></div>
+            <hr>
+            <div>Strávený čas:</div>
+            <div><b>{$task->spentTime} h</b></div>
+        </div>
+    </div>
+{/block}

@@ -1,0 +1,28 @@
+{import '../Presenters/templates/components/state.latte'}
+
+{snippet}
+    <div>
+        <ul class="list-group mb-1">
+            <li class="list-group-item row no-gutters d-flex">
+                <div n:foreach="$columns as $column" n:class="'col-sm-'.$column['width']">{$column['label']}</div>
+            </li>
+        </ul>
+        {if $data}
+        <div class="list-group mb-1">
+            {foreach $data as $item}
+                <a class="list-group-item list-group-item-action row no-gutters d-flex" href="{plink $hrefAction $item[$hrefColumn]}">
+                    <div n:foreach="$columns as $column" n:class="'col-sm-'.$column['width']">
+                        {if $column['type'] === text}
+                            {$item[$column['name']]}
+                        {elseif $column['type'] === state}
+                            {include state $item[$column['name']]}
+                        {elseif $column['type'] === datetime}
+                            {strtotime($item[$column['name']])|date:'j. n. Y H:i:s'}
+                        {/if}
+                    </div>
+                </a>
+            {/foreach}
+        </div>
+        {/if}
+    </div>
+{/snippet}

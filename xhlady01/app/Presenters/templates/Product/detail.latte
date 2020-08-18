@@ -1,0 +1,32 @@
+{block mainContent}
+    <div class="row">
+        <div class="col-sm-9">
+            <h1>{$product->name}</h1>
+        </div>
+        <div class="col-sm-3">
+            <a n:if="$showEdit" n:href="edit $product->id" class="btn btn-outline-warning">
+                Editovat
+            </a>
+            <a n:if="$showCreateTicket" n:href="Ticket:createWithProduct $product->id" class="btn btn-outline-primary">
+                Vytvořit tiket
+            </a>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-8 md-description">
+            {block|parsedown}{$product->description}{/block}
+        </div>
+        <div class="col-sm-4">
+            <div>
+                Odpovědná osoba:</div>
+            <div><b>{$manager['name']} {$manager['surname']}</b></div>
+            <div n:if="$isSubProduct">
+                <hr>
+                <div>Je součástí:</div>
+                <div><b>{$parent->name}</b></div>
+            </div>
+        </div>
+    </div>
+{/block}

@@ -1,0 +1,15 @@
+{import '../components/searchBox.latte'}
+
+{block mainContent}
+    <div class="row">
+        <div class="col-sm-9">
+            <h1>Produkty</h1>
+        </div>
+        <div class="col-sm-3">
+            <a class="btn btn-outline-primary" n:href="create" n:if="$showNew">Vytvořit nový produkt</a>
+        </div>
+    </div>
+    <hr>
+    {include searchBox}
+    {control grid}
+{/block}

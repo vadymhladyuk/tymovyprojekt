@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>ITS (Issue Tracking System)</h1>
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Dalimil Rozprým
+	    <a href="mailto:xrozpr00@stud.fit.vutbr.cz">xrozpr00@stud.fit.vutbr.cz</a> -
+		Návrh databázového modelu, funkčnost úkolů a produktů.
+	</dd>
+	<dd>Jan Sobol
+	    <a href="mailto:xsobol04@stud.fit.vutbr.cz">xsobol04@stud.fit.vutbr.cz</a> - 
+		Vytvoření kostry systému, funkčnosti tiketů a komentářů, vzhled grafického rozhraní.
+	</dd>
+  <dd>Vadym Hladyuk
+	    <a href="mailto:xhlady01@stud.fit.vutbr.cz">xhlady01@stud.fit.vutbr.cz</a> - 
+		Vytvoření dat do databáze, nahrání dat do databáze, činnosti admina, správa účtu, testování
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://issue-tracking-system.schoolmail.cz/">http://issue-tracking-system.schoolmail.cz/</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>vutfit2020</td><td>Administrátor</td></tr>
+<tr><td>guest</td><td>vutfit2020</td><td>Zákazník</td></tr>
+<tr><td>guest2</td><td>vutfit2020</td><td>Zákazník</td></tr>
+<tr><td>guest3</td><td>vutfit2020</td><td>Zákazník</td></tr>
+<tr><td>guest4</td><td>vutfit2020</td><td>Zákazník</td></tr>
+<tr><td>guest5</td><td>vutfit2020</td><td>Zákazník</td></tr>
+<tr><td>worker</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>worker2</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>worker3</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>worker4</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>worker5</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>worker6</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>worker7</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>worker8</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>worker9</td><td>vutfit2020</td><td>Pracovník</td></tr>
+<tr><td>manager</td><td>vutfit2020</td><td>Manažer</td></tr>
+<tr><td>manager2</td><td>vutfit2020</td><td>Manažer</td></tr>
+<tr><td>manager3</td><td>vutfit2020</td><td>Manažer</td></tr>
+<tr><td>manager4</td><td>vutfit2020</td><td>Manažer</td></tr>
+<tr><td>executive</td><td>vutfit2020</td><td>Vedoucí</td></tr>
+<tr><td>executive2</td><td>vutfit2020</td><td>Vedoucí</td></tr>
+<tr><td>executive3</td><td>vutfit2020</td><td>Vedoucí</td></tr>
+</table>
+
+
+
+<h2>Implementace</h2>
+<p>K implementaci byl využit framework Nette a funkčnost případů užití je rozdělena dle entit. Prezentační vrstva sestává z jednotlivých souborů .latte pro samostatné případy užití (detail.latte - shlédnutí detailu, edit.latte - úprava/přidání, apod.), aplikační vrstvu implementují presentery (TaskPresenter.php - úkol, TicketPresenter.php - tiket, apod.) a modelová vrstva a komunikace s databází je zajištěna manažery (ProductManager.php - produkt, UserManager.php - uživatel, apod.).</p>
+
+<h3>Databáze</h3>
+
+<img src="./diagrams/issue_tracking_system.jpg">
+
+<h2>Instalace</h2>
+Softwarové požadavky:
+<ul>
+	<li>PHP verze 7.2 a vyšší</li>
+	<li>balíčkovací nástroj composer</li>
+</ul>
+
+Postup instalace:
+<ul>
+	<li>rozbalení archivu xhlady01.zip do libovolné prázdné složky</li>
+	<li>spuštění <code>composer update</code> v kořenovém adresáři</li>
+	<li>spuštění webového serveru ve složce www (např. <code>php -S localhost:8080</code>)</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Není implementována možnost přikládat obrázky k tiketu, pouze komentáře a popis ve formátu Markdown.</p>
+
+</body>
+</html>

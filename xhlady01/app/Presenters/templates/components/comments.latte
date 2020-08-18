@@ -1,0 +1,12 @@
+{define comments}
+    {var $logIn = $user->isLoggedIn()}
+    {var $createComment = ($logIn and $user->isAllowed("create_comment"))}
+
+    <div n:foreach="$comments as $comment">
+        <div><b>{$userNames[$comment['authorId']]}:</b></div>
+        <div class="md-description">{block|parsedown}{$comment->content}{/block}</div>
+        <hr>
+    </div>
+
+    {if $createComment}{include bootstrap-form newCommentForm}{/if}
+{/define}
